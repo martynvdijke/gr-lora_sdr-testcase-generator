@@ -2,7 +2,7 @@
 
 echo "This script will generate test_cases and reference data"
 echo "This script is to be runned in the scripts folder of grp-lora_sdr folder"
-
+mkdir -p test_cases
 function run_generate {
     python main.py
 }
