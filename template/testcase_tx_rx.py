@@ -69,7 +69,7 @@ class qa_tx_rx(gr_unittest.TestCase):
         ##################################################
         self.lora_sdr_hier_tx_0 = lora_sdr.hier_tx(pay_len, n_frame,src_data
                                                    , cr, sf,
-                                                   impl_head, has_crc, samp_rate, bw, 200, [8, 16] , False)
+                                                   impl_head, has_crc, samp_rate, bw, 200, [8, 16] , True)
         self.lora_sdr_hier_rx_0_1_0_0_1_0 = lora_sdr.hier_rx(samp_rate, bw, sf, impl_head, cr, pay_len, has_crc, [8, 16] , True)
         self.interp_fir_filter_xxx_0_0 = filter.interp_fir_filter_ccf(4, (-0.128616616593872,	-0.212206590789194,	-0.180063263231421,	3.89817183251938e-17	,0.300105438719035	,0.636619772367581	,0.900316316157106,	1	,0.900316316157106,	0.636619772367581,	0.300105438719035,	3.89817183251938e-17,	-0.180063263231421,	-0.212206590789194,	-0.128616616593872))
         self.interp_fir_filter_xxx_0_0.declare_sample_delay(0)
@@ -177,9 +177,9 @@ class qa_tx_rx(gr_unittest.TestCase):
 
         # run the flowgraph, since we use a message strobe we have to run and stop the flowgraph with some computation time inbetween
         self.tb.start()
-        time.sleep(10)
-        self.tb.stop()
-        # self.tb.wait()
+        # time.sleep(10)
+        # self.tb.stop()
+        self.tb.wait()
         num_messages = self.blocks_message_debug_0.num_messages()
         if num_messages > 1:
             # try to get get the message from the store port of the message debug printer and convert to string from pmt message
